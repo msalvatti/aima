@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "types": [
+      "./src/typings/express.d.ts",
+      "node"
+    ],
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}
