@@ -33,7 +33,6 @@ module.exports = {
 
     await queryInterface.addIndex('Sales', ['productId', 'supplierId'], {
       name: 'sales_productId_supplierId_index',
-      unique: true
     })
   },
   async down(queryInterface, Sequelize) {

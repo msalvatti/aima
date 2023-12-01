@@ -8,7 +8,7 @@ import { notFoundMiddleware } from './middlewares/notFoundMiddleware';
 
 import productsRouter from './routers/productRouter';
 import suppliersRouter from './routers/supplierRouter';
-import salesRouter from './routers/supplierRouter';
+import salesRouter from './routers/saleRouter';
 import reportsRouter from './routers/reportRouter';
 
 import { authenticate } from './controllers/authController';

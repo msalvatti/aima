@@ -19,7 +19,9 @@ const handleError = (res: Response, errorMessage: string, error?: unknown): void
 
 export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      order: [['id', 'ASC']],
+    });
 
     res.json({ products });
   } catch (error) {

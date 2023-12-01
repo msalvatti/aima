@@ -5,7 +5,7 @@ const config = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     host: process.env.DB_HOST,
-    dialect: "postgres"
+    dialect: process.env.DB_DIALECT
 }
 
 export const sequelize = new Sequelize(
