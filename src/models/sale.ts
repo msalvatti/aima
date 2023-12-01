@@ -43,20 +43,10 @@ Sale.init(
     productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
-      references: {
-        model: Product,
-        key: 'id',
-      },
     },
     supplierId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
-      references: {
-        model: Supplier,
-        key: 'id',
-      },
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -73,7 +63,7 @@ Sale.init(
   },
 );
 
-Sale.belongsTo(Product, { foreignKey: 'productId' });
-Sale.belongsTo(Supplier, { foreignKey: 'supplierId' });
+Sale.hasMany(Product, { foreignKey: 'productId' });
+Sale.hasMany(Supplier, { foreignKey: 'supplierId' });
 
 export default Sale;

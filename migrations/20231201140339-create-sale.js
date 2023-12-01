@@ -30,6 +30,11 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+
+    await queryInterface.addIndex('Sales', ['productId', 'supplierId'], {
+      name: 'sales_productId_supplierId_index',
+      unique: true
+    })
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Sales');
