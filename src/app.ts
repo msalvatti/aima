@@ -7,6 +7,9 @@ import { errorMiddleware } from './middlewares/errorMiddleware';
 import { notFoundMiddleware } from './middlewares/notFoundMiddleware';
 
 import productsRouter from './routers/productRouter';
+import suppliersRouter from './routers/supplierRouter';
+import salesRouter from './routers/supplierRouter';
+import reportsRouter from './routers/reportRouter';
 
 import { authenticate } from './controllers/authController';
 
@@ -22,6 +25,12 @@ if (process.env.NODE_ENV !== 'production') {
 app.post('/sign-in', authenticate);
 
 app.use('/products', authMiddleware, productsRouter);
+
+app.use('/suppliers', authMiddleware, suppliersRouter);
+
+app.use('/sales', authMiddleware, salesRouter);
+
+app.use('/reports', authMiddleware, reportsRouter);
 
 app.use(notFoundMiddleware);
 
