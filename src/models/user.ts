@@ -1,18 +1,24 @@
 import { DataTypes, Model, Optional } from 'sequelize';
-import { sequelize }  from '../connection';
+import { sequelize } from '../connection';
 
 interface UserAttributes {
     id: number;
     login: string;
     password: string;
+    email: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
 
 class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
     public id!: number;
     public login!: string;
+    public email!: string;
     public password!: string;
+    public createdAt!: Date;
+    public updatedAt!: Date;
 }
 
 User.init(
@@ -25,9 +31,22 @@ User.init(
         login: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         password: {
             type: DataTypes.STRING,
+            allowNull: false,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
             allowNull: false,
         },
     },

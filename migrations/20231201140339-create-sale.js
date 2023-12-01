@@ -15,6 +15,12 @@ module.exports = {
       total: {
         type: Sequelize.FLOAT
       },
+      productId: {
+        type: Sequelize.INTEGER
+      },
+      supplierId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
