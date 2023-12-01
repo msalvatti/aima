@@ -4,7 +4,7 @@ module.exports = {
       {
         name: 'Supplier 1',
         contactPerson: 'John Karl',
-        email: 'john.example.com',
+        email: 'john@example.com',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

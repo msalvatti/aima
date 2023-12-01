@@ -2,14 +2,28 @@ import { Request, Response } from 'express';
 
 import Product from '../models/product';
 
+const handleError = (res: Response, errorMessage: string, error?: unknown): void => {
+  if (error instanceof Error) {
+    console.error(errorMessage, error);
+    res.status(500).send(`
+    500 Internal Server Error.
+    Something went wrong while processing the request. 
+    Error: ${error.message}`);
+  } else {
+    console.error(errorMessage);
+    res.status(500).send(`
+    500 Internal Server Error. 
+    Something went wrong while processing the request.`);
+  }
+};
+
 export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
   try {
     const products = await Product.findAll();
 
     res.json({ products });
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).send('500 Internal Server Error');
+    handleError(res, 'Error fetching products:', error);
   }
 };
 
@@ -25,8 +39,7 @@ export const getProductById = async (req: Request, res: Response): Promise<void>
       res.status(404).json({ message: 'Product not found.' });
     }
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).send('500 Internal Server Error');
+    handleError(res, 'Error fetching products:', error);
   }
 };
 
@@ -44,8 +57,7 @@ export const insertProduct = async (req: Request, res: Response): Promise<void> 
 
     res.status(201).json(newProduct);
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).send('500 Internal Server Error');
+    handleError(res, 'Error fetching products:', error);
   }
 };
 
@@ -64,8 +76,7 @@ export const updateProductById = async (req: Request, res: Response): Promise<vo
 
     res.json({ message: 'Product updated successfully.' });
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).send('500 Internal Server Error');
+    handleError(res, 'Error fetching products:', error);
   }
 };
 
@@ -82,9 +93,8 @@ export const deleteProductById = async (req: Request, res: Response): Promise<vo
 
     await existingProduct.destroy();
 
-    res.status(204).send(); 
+    res.status(204).send();
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).send('500 Internal Server Error');
+    handleError(res, 'Error fetching products:', error);
   }
 };

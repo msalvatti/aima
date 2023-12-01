@@ -21,82 +21,82 @@ afterAll(async () => {
     await sequelize.close();
 });
 
-describe('Products', () => {
-    let productId: number;
+describe('Suppliers', () => {
+    let supplierId: number;
 
     it('should get error Authorization ', async () => {
         const response = await request(app)
-            .get('/products')
+            .get('/suppliers')
             .set('Authorization', "");
 
         expect(response.status).toBe(401);
     });
 
-    it('should get all products', async () => {
+    it('should get all suppliers', async () => {
         const response = await request(app)
-            .get('/products')
+            .get('/suppliers')
             .set('Authorization', authToken);
 
         expect(response.status).toBe(200);
-        expect(response.body.products).toBeDefined();
+        expect(response.body.suppliers).toBeDefined();
     });
 
-    it('should insert product', async () => {
+    it('should insert supplier', async () => {
         const body = {
-            name: "New Product",
-            price: 10.00,
-            quantity: 200
+            name: "New Supplier",
+            contactPerson: "Leo Nets",
+            email: "leo@example.com"
         }
 
         const response = await request(app)
-            .post('/products')
+            .post('/suppliers')
             .set('Authorization', authToken)
             .send(body);
 
         expect(response.status).toBe(201);
         expect(response.body.id).toBeDefined();
-        productId = response.body.id;
+        supplierId = response.body.id;
     });
 
-    it('should get product by id', async () => {
+    it('should get supplier by id', async () => {
         const response = await request(app)
-            .get(`/products/${productId}`)
+            .get(`/suppliers/${supplierId}`)
             .set('Authorization', authToken);
 
         expect(response.status).toBe(200);
-        expect(response.body.product).toBeDefined();
+        expect(response.body.supplier).toBeDefined();
     });
 
-    it('should update an existing product', async () => {
+    it('should update an existing supplier', async () => {
         const body = {
-            name: "Product updated",
-            price: 15.00,
-            quantity: 250
+            name: "Supplier updated",
+            contactPerson: "Francis Trovaus",
+            email: "francis@example.com"
         }
 
         const response = await request(app)
-          .put(`/products/${productId}`)
+          .put(`/suppliers/${supplierId}`)
           .set('Authorization', authToken)
           .send(body);
     
         expect(response.status).toBe(200);
-        expect(response.body.message).toBe('Product updated successfully.');
+        expect(response.body.message).toBe('Supplier updated successfully.');
       });
 
-      it('should delete the product', async () => {
+      it('should delete the supplier', async () => {
         const response = await request(app)
-          .delete(`/products/${productId}`)
+          .delete(`/suppliers/${supplierId}`)
           .set('Authorization', authToken);
     
         expect(response.status).toBe(204);
       });
     
-      it('should verify that the product was deleted', async () => {
+      it('should verify that the supplier was deleted', async () => {
         const response = await request(app)
-          .get(`/products/${productId}`)
+          .get(`/suppliers/${supplierId}`)
           .set('Authorization', authToken);
     
         expect(response.status).toBe(404);
-        expect(response.body.message).toBe('Product not found.');
+        expect(response.body.message).toBe('Supplier not found.');
       });
 });
