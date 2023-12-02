@@ -77,4 +77,4 @@ npm run start
 
 13. Use the postman collection
 
-In the postman folder, the collection was made available to test all endpoints through postman, just import the collection into your postman to use it.
+In the postman folder, the collection and environment was made available to test all endpoints through postman, just import the collection file and import the environment file into your postman to use it.
