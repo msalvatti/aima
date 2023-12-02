@@ -8,6 +8,7 @@
     "dev": "npx nodemon -r dotenv/config ./src/server.ts",
     "build": "tsc",
     "test": "jest",
+    "test:cov": "jest --coverage",
     "docker:create": "docker-compose up --build",
     "docker:start": "docker-compose up -d",
     "createdb": "npx sequelize-cli db:create",
